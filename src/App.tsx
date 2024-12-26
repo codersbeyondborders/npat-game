@@ -4,6 +4,7 @@ import { generateClient } from "aws-amplify/data";
 
 const client = generateClient<Schema>();
 
+//Test
 function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
