@@ -1,40 +1,53 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+import { useEffect, useState } from 'react';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { GameProvider } from './contexts/GameContext';
+import GameContainer from './components/GameContainer';
+import AuthContainer from './components/AuthContainer';
+import './App.css';
 
-const client = generateClient<Schema>();
+const GameWrapper = () => {
+  const { isAuthenticated } = useAuth();
 
-//Test
-function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+  if (!isAuthenticated) {
+    return <AuthContainer />;
   }
 
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
+    <div>
+      <GameContainer />
+    </div>
+  );
+};
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading of resources
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <div className="loader">Loading...</div>
       </div>
-    </main>
+    );
+  }
+
+  return (
+    <AuthProvider>
+      <GameProvider>
+        <main className="app-container">
+          <h1>Name, Place, Animal, Thing</h1>
+          <GameWrapper />
+        </main>
+      </GameProvider>
+    </AuthProvider>
   );
 }
 

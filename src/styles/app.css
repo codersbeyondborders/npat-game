@@ -1,0 +1,66 @@
+/* App Container */
+.app-container {
+  @apply min-h-screen bg-gray-50 py-12 px-4;
+}
+
+/* Mode Selection */
+.mode-selection {
+  @apply max-w-4xl mx-auto text-center;
+}
+
+.game-mode-button {
+  @apply p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow
+         border-2 border-transparent hover:border-blue-500 space-y-4;
+}
+
+.game-mode-button h2 {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+.game-mode-button p {
+  @apply text-gray-600;
+}
+
+/* Game Header */
+.game-header {
+  @apply bg-white shadow-md rounded-lg p-6 mb-8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mode-selection {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.game-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive Design */
+@screen sm {
+  .app-container {
+    @apply px-6;
+  }
+}
+
+@screen md {
+  .app-container {
+    @apply px-8;
+  }
+}
+
+@screen lg {
+  .app-container {
+    @apply px-12;
+  }
+}

@@ -1,0 +1,47 @@
+/* User Profile */
+.user-profile {
+  @apply max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg;
+}
+
+.profile-header {
+  @apply flex justify-between items-center mb-8 pb-4 border-b;
+}
+
+.signout-button {
+  @apply px-4 py-2 text-red-600 border border-red-600 rounded hover:bg-red-50;
+}
+
+/* Stats Grid */
+.stats-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4 mb-8;
+}
+
+.stat-card {
+  @apply p-4 bg-gray-50 rounded-lg text-center;
+}
+
+.stat-label {
+  @apply text-sm text-gray-600 mb-1;
+}
+
+.stat-value {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+/* Level Progress */
+.progress-section {
+  @apply mt-8;
+}
+
+.level-grid {
+  @apply grid grid-cols-6 sm:grid-cols-13 gap-2;
+}
+
+.level-indicator {
+  @apply w-10 h-10 flex items-center justify-center rounded-full 
+         border-2 border-gray-300 text-gray-500 font-bold;
+}
+
+.level-indicator.completed {
+  @apply bg-green-100 border-green-500 text-green-700;
+}

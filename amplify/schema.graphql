@@ -1,0 +1,54 @@
+type Player @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String!
+  gamesPlayed: Int!
+  gamesWon: Int!
+  highScore: Int!
+  totalScore: Int!
+}
+
+type Game @model 
+  @auth(rules: [{allow: public}])
+  @hasMany(indexName: "byGame", fields: ["id"])
+{
+  id: ID!
+  mode: String! # "SINGLE" or "MULTI"
+  status: String! # "WAITING", "PLAYING", "FINISHED"
+  currentLetter: String
+  currentRound: Int
+  maxPlayers: Int
+  timeLimit: Int
+  players: [Player] @manyToMany(relationName: "PlayerGames")
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type GameRound @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  gameId: ID! @index(name: "byGame")
+  roundNumber: Int!
+  letter: String!
+  answers: [Answer] @hasMany
+  startTime: AWSDateTime
+  endTime: AWSDateTime
+}
+
+type Answer @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  gameRoundId: ID!
+  playerId: ID!
+  name: String
+  place: String
+  animal: String
+  thing: String
+  isValid: Boolean
+  score: Int
+  submittedAt: AWSDateTime!
+}
+
+type Subscription {
+  onUpdateGame(id: ID!): Game
+    @aws_subscribe(mutations: ["updateGame"])
+  onCreateAnswer(gameRoundId: ID!): Answer
+    @aws_subscribe(mutations: ["createAnswer"])
+}

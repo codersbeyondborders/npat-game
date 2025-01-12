@@ -1,0 +1,47 @@
+/* Auth Container */
+.auth-container {
+  @apply bg-white p-8 rounded-lg shadow-md w-full;
+}
+
+/* Auth Input */
+.auth-input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none 
+         focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+/* Error Message */
+.error-message {
+  @apply text-red-600 bg-red-100 p-3 rounded-md;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  @apply text-xl text-gray-600;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form Group */
+.form-group {
+  @apply space-y-1;
+}
+
+.form-group label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+/* Auth Buttons */
+.auth-button {
+  @apply w-full flex justify-center py-2 px-4 border border-transparent rounded-md
+         shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700
+         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+         disabled:opacity-50 disabled:cursor-not-allowed;
+}
